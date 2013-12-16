@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import com.startuphouse.booking.model.listini.Convention;
 

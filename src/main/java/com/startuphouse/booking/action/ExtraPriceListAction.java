@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- *  Copyright 2011 - Sardegna Ricerche, Distretto ICT, Pula, Italy
+/ *  Copyright 2011 - Sardegna Ricerche, Distretto ICT, Pula, Italy
  *
  * Licensed under the EUPL, Version 1.1.
  * You may not use this work except in compliance with the Licence.
@@ -15,6 +15,7 @@
  *******************************************************************************/
 package com.startuphouse.booking.action;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -101,7 +102,11 @@ public class ExtraPriceListAction extends ActionSupport implements SessionAware,
 		
 		years = new HashSet<Integer>();
 		context = ServletActionContext.getServletContext();
-		webappPath = context.getContextPath();
+		try {
+			webappPath = context.getResource("/").getPath();
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 		
 		for (Season eachSeason : this.getSeasonService().findSeasonsByIdStructure(this.getIdStructure())) {				//Building the Set with all years
 			years.add(eachSeason.getYear());
@@ -177,7 +182,8 @@ public class ExtraPriceListAction extends ActionSupport implements SessionAware,
 	public Map<String, Object> getSession() {
 		return session;
 	}
-	@Override
+	
+	
 	public void setSession(Map<String, Object> session) {
 		this.session = session;	
 	}

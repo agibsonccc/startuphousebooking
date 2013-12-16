@@ -22,7 +22,7 @@ import java.util.GregorianCalendar;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @XmlRootElement

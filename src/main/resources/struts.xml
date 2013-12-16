@@ -20,18 +20,22 @@
 	<constant name="struts.custom.i18n.resources" value="global" />
 	<constant name="struts.multipart.maxSize" value="1000000" />
 	<constant name="struts.action.excludePattern" value="/rest/.*?" />
-	
-	<package name="default" extends="struts-default,json-default"	namespace="/">
+	<constant name="struts.convention.package.locators.basePackage"
+		value="com.startuphouse.booking.action" />
+	<constant name="struts.convention.package.locators" value="action" />
+	<constant name="struts.devMode" value="true" />
+	<package name="default" extends="struts-default,json-default"
+		namespace="/">
 		<interceptors>
 			<interceptor name="userAwareInterceptor"
-				class="struts.interceptor.UserAwareInterceptor"></interceptor>
+				class="com.startuphouse.booking.struts.interceptor.UserAwareInterceptor"></interceptor>
 			<interceptor-stack name="userAwareStack">
 				<interceptor-ref name="userAwareInterceptor"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="userAwareStack"></default-interceptor-ref>
-	<default-action-ref name="home"></default-action-ref>
+		<default-action-ref name="home"></default-action-ref>
 		<global-results>
 			<result name="notLogged">/WEB-INF/jsp/homeNotLogged.jsp</result>
 			<result name="nullpointer" type="redirect">home.action</result>
@@ -41,25 +45,10 @@
 			<exception-mapping exception="java.lang.NullPointerException"
 				result="nullpointer" />
 		</global-exception-mappings>
-		<action name="locale" class="action.LocaleAction">
+		<action name="locale" class="com.startuphouse.booking.action.LocaleAction">
 			<result name="SUCCESS" type="redirect">${redirect}</result>
 		</action>
 
-		<action name="download" class="action.DownloadAction">
-			<result name="success" type="stream">
-				<param name="contentType">application/octet-stream</param>
-				<param name="inputName">fileInputStream</param>
-				<param name="contentDisposition">attachment;filename="${fileName}"</param>
-				<param name="bufferSize">1024</param>
-			</result>
-		</action>		
-		
-		<action name="birt" class="action.BirtAction">
-			<result type="stream">
-				 <param name="contentType">application/pdf</param>  
-				<param name="inputName">inputStream</param>
-				<param name="contentDisposition">attachment;filename="${fileName}"</param>
-			</result>
-		</action>
+
 	</package>
 </struts>

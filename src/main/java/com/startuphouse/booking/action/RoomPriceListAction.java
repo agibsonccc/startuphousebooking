@@ -15,6 +15,7 @@
  *******************************************************************************/
 package com.startuphouse.booking.action;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -115,7 +116,11 @@ public class RoomPriceListAction extends ActionSupport implements SessionAware,U
 		
 		years = new HashSet<Integer>();
 		context = ServletActionContext.getServletContext();
-		webappPath = context.getContextPath();
+		try {
+			webappPath = context.getResource("/").getPath();
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 		
 		for (Season eachSeason : this.getSeasonService().findSeasonsByIdStructure(this.getIdStructure())) {				//Building the Set with all years
 			years.add(eachSeason.getYear());
