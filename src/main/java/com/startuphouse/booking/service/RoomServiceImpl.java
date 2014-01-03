@@ -25,8 +25,8 @@ import org.springframework.stereotype.Service;
 
 import com.startuphouse.booking.model.Facility;
 import com.startuphouse.booking.model.Image;
-import com.startuphouse.booking.model.Room;
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.Bed;
+import com.startuphouse.booking.model.BedType;
 import com.startuphouse.booking.persistence.mybatis.mappers.RoomMapper;
 import com.startuphouse.booking.persistence.mybatis.mappers.RoomTypeMapper;
 
@@ -40,11 +40,11 @@ public class RoomServiceImpl implements RoomService{
 	@Autowired
 	private FacilityService facilityService = null;
 	@Autowired
-	private RoomFacilityService roomFacilityService = null;
+	private BedFacilityService bedFacilityService = null;
 	@Autowired
 	private ImageService imageService = null;
 	@Autowired
-	private RoomImageService roomImageService = null;
+	private BedImageService bedImageService = null;
 	@Autowired
 	private RoomTypeFacilityService roomTypeFacilityService = null;
 	@Autowired
@@ -57,27 +57,27 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public Room findRoomById(Integer id) {	
-		Room room = null;
-		RoomType roomType = null;
+	public Bed findRoomById(Integer id) {	
+		Bed bed = null;
+		BedType bedType = null;
 		//List<Facility> facilities = null;
 		//List<Image> images = null;
 		
-		room = this.getRoomMapper().findRoomById(id);
-		if (room!=null){
-			roomType = this.getRoomTypeMapper().findRoomTypeById(room.getId_roomType());
-			room.setRoomType(roomType);	
+		bed = this.getRoomMapper().findRoomById(id);
+		if (bed!=null){
+			bedType = this.getRoomTypeMapper().findRoomTypeById(bed.getId_roomType());
+			bed.setRoomType(bedType);	
 			//facilities = this.getFacilityService().findCheckedByIdRoom(id);
 			//room.setFacilities(facilities);
 			//images = this.getImageService().findCheckedByIdRoom(id);
 			//room.setImages(images);
 		}
-		return room;
+		return bed;
 	}
 
 	@Override
-	public Integer updateRoom(Room room) {
-		return this.getRoomMapper().updateRoom(room);
+	public Integer updateRoom(Bed bed) {
+		return this.getRoomMapper().updateRoom(bed);
 	}	
 
 	@Override
@@ -90,23 +90,23 @@ public class RoomServiceImpl implements RoomService{
 		return ret;
 	}
 
-	public List<Room> findAll() {
+	public List<Bed> findAll() {
 		return this.getRoomMapper().findAll();
 	}
 	
 	@Override
-	public List<Room> findRoomsByIdStructure(Integer id_structure) {	
-		List<Room> rooms = null;
-		RoomType roomType = null;
+	public List<Bed> findRoomsByIdStructure(Integer id_structure) {	
+		List<Bed> beds = null;
+		BedType bedType = null;
 		
-		rooms = this.getRoomMapper().findRoomsByIdStructure(id_structure);
-		for(Room each: rooms){
-			roomType = this.getRoomTypeMapper().findRoomTypeById(each.getId_roomType());
+		beds = this.getRoomMapper().findRoomsByIdStructure(id_structure);
+		for(Bed each: beds){
+			bedType = this.getRoomTypeMapper().findRoomTypeById(each.getId_roomType());
 			//roomType.setImages(this.getImageService().findCheckedByIdRoomType(roomType.getId()));
-			each.setRoomType(roomType);
+			each.setRoomType(bedType);
 			//each.setImages(this.getImageService().findCheckedByIdRoom(each.getId()));
 		}
-		return rooms;
+		return beds;
 	}
 	
 	@Override
@@ -115,7 +115,7 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public List<Room> findRoomsByIdStructure(Integer id_structure, Integer offset, Integer rownum) {
+	public List<Bed> findRoomsByIdStructure(Integer id_structure, Integer offset, Integer rownum) {
 		Map map = null;
 		
 		map = new HashMap();
@@ -125,20 +125,20 @@ public class RoomServiceImpl implements RoomService{
 		return this.getRoomMapper().findRoomsByIdStructureAndOffsetAndRownum(map);
 	}
 	
-	public List<Room> findRoomsByIdRoomType(Integer id_roomType){
-		List<Room> rooms = null;
-		RoomType roomType = null;
+	public List<Bed> findRoomsByIdRoomType(Integer id_roomType){
+		List<Bed> beds = null;
+		BedType bedType = null;
 		
-		rooms = this.getRoomMapper().findRoomsByIdRoomType(id_roomType);
-		for(Room each: rooms){
-			roomType = this.getRoomTypeMapper().findRoomTypeById(each.getId_roomType());
-			each.setRoomType(roomType);
+		beds = this.getRoomMapper().findRoomsByIdRoomType(id_roomType);
+		for(Bed each: beds){
+			bedType = this.getRoomTypeMapper().findRoomTypeById(each.getId_roomType());
+			each.setRoomType(bedType);
 		}
-		return rooms;	
+		return beds;	
 	}
 
 	@Override
-	public Room findRoomByIdStructureAndName(Integer id_structure, String name ){	
+	public Bed findRoomByIdStructureAndName(Integer id_structure, String name ){	
 		Map map = null;
 		
 		map = new HashMap();
@@ -154,14 +154,14 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public Integer insertRoom(Room room) {	
+	public Integer insertRoom(Bed bed) {	
 		Integer count;
 		Integer id_room;
 		Integer id_roomType;
 				
-		count = this.getRoomMapper().insertRoom(room);
-		id_room = room.getId();
-		id_roomType = room.getRoomType().getId();
+		count = this.getRoomMapper().insertRoom(bed);
+		id_room = bed.getId();
+		id_roomType = bed.getRoomType().getId();
 		
 		for(Integer id_facility: this.getRoomTypeFacilityService().findIdFacilityByIdRoomType(id_roomType, 0, 10000)){
 			this.getRoomFacilityService().insert(id_room, id_facility);
@@ -198,17 +198,17 @@ public class RoomServiceImpl implements RoomService{
 	public void setImageService(ImageService imageService) {
 		this.imageService = imageService;
 	}
-	public RoomImageService getRoomImageService() {
-		return roomImageService;
+	public BedImageService getRoomImageService() {
+		return bedImageService;
 	}
-	public void setRoomImageService(RoomImageService roomImageService) {
-		this.roomImageService = roomImageService;
+	public void setRoomImageService(BedImageService bedImageService) {
+		this.bedImageService = bedImageService;
 	}
-	public RoomFacilityService getRoomFacilityService() {
-		return roomFacilityService;
+	public BedFacilityService getRoomFacilityService() {
+		return bedFacilityService;
 	}
-	public void setRoomFacilityService(RoomFacilityService roomFacilityService) {
-		this.roomFacilityService = roomFacilityService;
+	public void setRoomFacilityService(BedFacilityService bedFacilityService) {
+		this.bedFacilityService = bedFacilityService;
 	}
 
 	public RoomTypeFacilityService getRoomTypeFacilityService() {

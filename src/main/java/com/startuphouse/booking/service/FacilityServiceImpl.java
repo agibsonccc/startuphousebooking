@@ -36,7 +36,7 @@ public class FacilityServiceImpl implements FacilityService{
 	@Autowired
 	private StructureFacilityService structureFacilityService = null;
 	@Autowired
-	private RoomFacilityService roomFacilityService = null;
+	private BedFacilityService bedFacilityService = null;
 	@Autowired
 	private RoomTypeFacilityService roomTypeFacilityService = null;	
 	@Autowired
@@ -176,11 +176,11 @@ public class FacilityServiceImpl implements FacilityService{
 	public void setRoomTypeFacilityService(RoomTypeFacilityService roomTypeFacilityService) {
 		this.roomTypeFacilityService = roomTypeFacilityService;
 	}
-	public RoomFacilityService getRoomFacilityService() {
-		return roomFacilityService;
+	public BedFacilityService getRoomFacilityService() {
+		return bedFacilityService;
 	}
-	public void setRoomFacilityService(RoomFacilityService roomFacilityService) {
-		this.roomFacilityService = roomFacilityService;
+	public void setRoomFacilityService(BedFacilityService bedFacilityService) {
+		this.bedFacilityService = bedFacilityService;
 	}
 	public FacilityImageService getFacilityImageService() {
 		return facilityImageService;

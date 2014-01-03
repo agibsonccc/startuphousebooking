@@ -26,7 +26,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RoomType implements Serializable{
+public class BedType implements Serializable{
 	
 	@Field
 	private Integer id;
@@ -42,7 +42,7 @@ public class RoomType implements Serializable{
 	private Integer id_structure;
 	
 	
-	public RoomType(){
+	public BedType(){
 		this.images = new ArrayList<Image>();
 		this.facilities = new ArrayList<Facility>();
 	}
@@ -78,7 +78,7 @@ public class RoomType implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RoomType other = (RoomType) obj;
+		BedType other = (BedType) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

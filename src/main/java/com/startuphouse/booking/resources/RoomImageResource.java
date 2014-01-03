@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 
 import com.startuphouse.booking.model.Image;
 import com.startuphouse.booking.service.ImageService;
-import com.startuphouse.booking.service.RoomImageService;
+import com.startuphouse.booking.service.BedImageService;
 import com.startuphouse.booking.service.RoomService;
 import com.sun.jersey.api.NotFoundException;
 
@@ -36,7 +36,7 @@ public class RoomImageResource {
 	@Autowired
 	private ImageService imageService = null;
 	@Autowired
-	private RoomImageService roomImageService = null;
+	private BedImageService bedImageService = null;
 	@Autowired
 	private RoomService roomService = null;
 		
@@ -106,12 +106,12 @@ public class RoomImageResource {
 		this.imageService = imageService;
 	}
 
-	public RoomImageService getRoomImageService() {
-		return roomImageService;
+	public BedImageService getRoomImageService() {
+		return bedImageService;
 	}
 
-	public void setRoomImageService(RoomImageService roomImageService) {
-		this.roomImageService = roomImageService;
+	public void setRoomImageService(BedImageService bedImageService) {
+		this.bedImageService = bedImageService;
 	}
 
 	public RoomService getRoomService() {

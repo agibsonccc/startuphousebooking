@@ -38,8 +38,7 @@ import com.startuphouse.booking.service.ExtraService;
 import com.startuphouse.booking.service.GuestService;
 import com.startuphouse.booking.service.RoomPriceListService;
 import com.startuphouse.booking.service.RoomService;
-import com.startuphouse.booking.service.RoomTypeService;
-import com.startuphouse.booking.service.SeasonService;
+import com.startuphouse.booking.service.BedTypeService;
 import com.startuphouse.booking.service.StructureService;
 import com.startuphouse.booking.service.UserService;
 
@@ -48,8 +47,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	private Map<String, Object> session = null;
 	private String email = null;
 	private String password;
-	@Autowired
-	private SeasonService seasonService = null;
+	
 	@Autowired
 	private ExtraService extraService = null;
 	@Autowired
@@ -59,7 +57,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	@Autowired
 	private BookingService bookingService = null;
 	@Autowired
-	private RoomTypeService roomTypeService = null;
+	private BedTypeService bedTypeService = null;
 	@Autowired
 	private RoomService roomService = null;
 	@Autowired
@@ -153,12 +151,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public SeasonService getSeasonService() {
-		return seasonService;
-	}
-	public void setSeasonService(SeasonService seasonService) {
-		this.seasonService = seasonService;
-	}
+	
 	public ExtraService getExtraService() {
 		return extraService;
 	}
@@ -183,11 +176,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public void setBookingService(BookingService bookingService) {
 		this.bookingService = bookingService;
 	}
-	public RoomTypeService getRoomTypeService() {
-		return roomTypeService;
+	public BedTypeService getRoomTypeService() {
+		return bedTypeService;
 	}
-	public void setRoomTypeService(RoomTypeService roomTypeService) {
-		this.roomTypeService = roomTypeService;
+	public void setRoomTypeService(BedTypeService bedTypeService) {
+		this.bedTypeService = bedTypeService;
 	}
 	public RoomService getRoomService() {
 		return roomService;

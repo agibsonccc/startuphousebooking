@@ -39,7 +39,7 @@ public class ImageServiceImpl implements ImageService{
 	@Autowired
 	private RoomTypeImageService roomTypeImageService = null;
 	@Autowired
-	private RoomImageService roomImageService = null;
+	private BedImageService bedImageService = null;
 	@Autowired
 	private FacilityService facilityService = null;
 	@Autowired
@@ -203,11 +203,11 @@ public class ImageServiceImpl implements ImageService{
 	public void setRoomTypeImageService(RoomTypeImageService roomTypeImageService) {
 		this.roomTypeImageService = roomTypeImageService;
 	}
-	public RoomImageService getRoomImageService() {
-		return roomImageService;
+	public BedImageService getRoomImageService() {
+		return bedImageService;
 	}
-	public void setRoomImageService(RoomImageService roomImageService) {
-		this.roomImageService = roomImageService;
+	public void setRoomImageService(BedImageService bedImageService) {
+		this.bedImageService = bedImageService;
 	}
 	public FacilityService getFacilityService() {
 		return facilityService;

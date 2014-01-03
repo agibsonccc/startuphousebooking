@@ -18,21 +18,21 @@ package com.startuphouse.booking.persistence.mybatis.mappers;
 import java.util.List;
 import java.util.Map;
 
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.BedType;
 
 public interface RoomTypeMapper {
-	public Integer insertRoomType(RoomType roomType);
-	public Integer updateRoomType(RoomType roomType);
+	public Integer insertRoomType(BedType bedType);
+	public Integer updateRoomType(BedType bedType);
 	public Integer deleteRoomType(Integer id);
 	
-	public List<RoomType> findAll();
-	public List<RoomType> findRoomTypesByIdStructure(Integer id_structure);
+	public List<BedType> findAll();
+	public List<BedType> findRoomTypesByIdStructure(Integer id_structure);
 	public List<Integer> findRoomTypeIdsByIdStructure(Integer id_structure);
 	public Integer findIdStructureByIdRoomType(Integer idRoomType);
 	
-	public List<RoomType> findRoomTypesByIdStructureAndOffsetAndRownum(Map map);
-	public List<RoomType> search(Map map);
+	public List<BedType> findRoomTypesByIdStructureAndOffsetAndRownum(Map map);
+	public List<BedType> search(Map map);
 	
-	public RoomType findRoomTypeById(Integer id);
-	public RoomType findRoomTypeByIdStructureAndName(Map map);
+	public BedType findRoomTypeById(Integer id);
+	public BedType findRoomTypeByIdStructureAndName(Map map);
 }

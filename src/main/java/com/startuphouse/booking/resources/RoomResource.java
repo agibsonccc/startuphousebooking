@@ -27,12 +27,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.startuphouse.booking.model.Room;
+import com.startuphouse.booking.model.Bed;
 import com.startuphouse.booking.service.BookingService;
 import com.startuphouse.booking.service.FacilityService;
 import com.startuphouse.booking.service.ImageService;
 import com.startuphouse.booking.service.RoomService;
-import com.startuphouse.booking.service.RoomTypeService;
+import com.startuphouse.booking.service.BedTypeService;
 import com.sun.jersey.api.NotFoundException;
 
 
@@ -44,7 +44,7 @@ public class RoomResource {
 	@Autowired
     private RoomService roomService = null;
 	@Autowired
-    private RoomTypeService roomTypeService = null;
+    private BedTypeService bedTypeService = null;
 	@Autowired
     private BookingService bookingService = null;
 	@Autowired
@@ -57,11 +57,11 @@ public class RoomResource {
 	
 	@PostConstruct
     public void init(){
-    	List<Room> rooms = null;
+    	List<Bed> beds = null;
     	
-    	rooms = this.getRoomService().findAll();
+    	beds = this.getRoomService().findAll();
     	try {
-			this.getSolrServerRoom().addBeans(rooms);
+			this.getSolrServerRoom().addBeans(beds);
 			this.getSolrServerRoom().commit();
 		} catch (SolrServerException e) {			
 			e.printStackTrace();
@@ -73,13 +73,13 @@ public class RoomResource {
 	@GET
     @Path("structure/{idStructure}/search/{start}/{rows}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Room> search(@PathParam("idStructure") Integer idStructure,@PathParam("start") Integer start,@PathParam("rows") Integer rows, @QueryParam("term") String term){
-        List<Room> rooms = null;
+    public List<Bed> search(@PathParam("idStructure") Integer idStructure,@PathParam("start") Integer start,@PathParam("rows") Integer rows, @QueryParam("term") String term){
+        List<Bed> beds = null;
         SolrQuery query = null;
         QueryResponse rsp = null;
         SolrDocumentList solrDocumentList = null;
         SolrDocument solrDocument = null;
-        Room aRoom = null;
+        Bed aRoom = null;
         Integer id;             
        
         if(term.trim().equals("")){
@@ -98,7 +98,7 @@ public class RoomResource {
 			e.printStackTrace();			
 		}
 
-        rooms = new ArrayList<Room>();
+        beds = new ArrayList<Bed>();
         if(rsp!=null){
     	   solrDocumentList = rsp.getResults();
            for(int i = 0; i <solrDocumentList.size(); i++){
@@ -107,10 +107,10 @@ public class RoomResource {
             // System.out.println("----> "+solrDocument.getFieldValues("text")+" <-----");
         	   aRoom = this.getRoomService().findRoomById(id);
         	   aRoom.setRoomType(this.getRoomTypeService().findRoomTypeById(aRoom.getId_roomType()));
-        	   rooms.add(aRoom);
+        	   beds.add(aRoom);
            }  
        }       
-       return rooms;          
+       return beds;          
     }
     
 	 @GET
@@ -153,8 +153,8 @@ public class RoomResource {
 	@GET
 	@Path("{id}")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Room getRoom(@PathParam("id") Integer id){
-		Room ret = null;
+	public Bed getRoom(@PathParam("id") Integer id){
+		Bed ret = null;
 		
 		ret = this.getRoomService().findRoomById(id);
 		ret.setRoomType(this.getRoomTypeService().findRoomTypeById(ret.getId_roomType()));
@@ -164,48 +164,48 @@ public class RoomResource {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Room save(Room room) {
+	public Bed save(Bed bed) {
 		Integer idRoomType = 0;
 
-		idRoomType = room.getId_roomType();
+		idRoomType = bed.getId_roomType();
 		// if (idRoomType != null) {
 		try {
-			room.setRoomType(this.getRoomTypeService().findRoomTypeById(idRoomType));
-			this.getRoomService().insertRoom(room);
+			bed.setRoomType(this.getRoomTypeService().findRoomTypeById(idRoomType));
+			this.getRoomService().insertRoom(bed);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
-			this.getSolrServerRoom().addBean(room);
+			this.getSolrServerRoom().addBean(bed);
 			this.getSolrServerRoom().commit();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SolrServerException e) {
 			e.printStackTrace();
 		}
-		return room;
+		return bed;
 	}
    
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Room update(Room room) {        
+    public Bed update(Bed bed) {        
         
     	try {
-    	this.getRoomService().updateRoom(room);
+    	this.getRoomService().updateRoom(bed);
     	}catch(Exception ex){}
     	try {
-    		this.getSolrServerRoom().addBean(room);			
+    		this.getSolrServerRoom().addBean(bed);			
     		this.getSolrServerRoom().commit();			
     	} catch (IOException e) {
     		e.printStackTrace();
     	} catch (SolrServerException e) {
     		e.printStackTrace();
     	}
-    	room.setRoomType(this.getRoomTypeService().findRoomTypeById(room.getId_roomType()));
-        return room;
+    	bed.setRoomType(this.getRoomTypeService().findRoomTypeById(bed.getId_roomType()));
+        return bed;
     }
     
     @DELETE
@@ -239,11 +239,11 @@ public class RoomResource {
 	public void setRoomService(RoomService roomService) {
 		this.roomService = roomService;
 	}
-	public RoomTypeService getRoomTypeService() {
-		return roomTypeService;
+	public BedTypeService getRoomTypeService() {
+		return bedTypeService;
 	}
-	public void setRoomTypeService(RoomTypeService roomTypeService) {
-		this.roomTypeService = roomTypeService;
+	public void setRoomTypeService(BedTypeService bedTypeService) {
+		this.bedTypeService = bedTypeService;
 	}
 	public BookingService getBookingService() {
 		return bookingService;

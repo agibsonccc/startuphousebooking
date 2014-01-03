@@ -38,7 +38,7 @@ import com.startuphouse.booking.model.Booking;
 import com.startuphouse.booking.model.Extra;
 import com.startuphouse.booking.model.ExtraItem;
 import com.startuphouse.booking.model.Image;
-import com.startuphouse.booking.model.Room;
+import com.startuphouse.booking.model.Bed;
 import com.startuphouse.booking.model.Structure;
 import com.startuphouse.booking.model.listini.Convention;
 import com.startuphouse.booking.service.BookingService;
@@ -53,7 +53,7 @@ import com.startuphouse.booking.service.StructureService;
 public class OnlineBookingAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session = null;
 	
-	private List<Room> rooms = null;
+	private List<Bed> beds = null;
 	private Booking booking = null;
 	private Integer id;
 	private Integer numNights = 1;
@@ -117,7 +117,7 @@ public class OnlineBookingAction extends ActionSupport implements SessionAware{
 	})
 	public String goOnlineBookingRooms(){
 		Structure structure = null;
-		List <Room> rooms = null;
+		List <Bed> beds = null;
 		List <Image> images = null;
 		Booking booking = null;
 		Date dateOut = null;
@@ -143,10 +143,10 @@ public class OnlineBookingAction extends ActionSupport implements SessionAware{
 		booking.setConvention(defaultConvention);
 		booking.setId_convention(defaultConvention.getId());
 		
-		this.setRooms(new ArrayList<Room>());
+		this.setRooms(new ArrayList<Bed>());
 		
-		rooms = new ArrayList<Room>();
-		for(Room each : this.getRoomService().findRoomsByIdStructure(structure.getId())){			
+		beds = new ArrayList<Bed>();
+		for(Bed each : this.getRoomService().findRoomsByIdStructure(structure.getId())){			
 			if ( (each.getRoomType().getMaxGuests() >= booking.getNrGuests() ) && 
 					this.getStructureService().hasRoomFreeInPeriod(structure.getId(),each.getId(), booking.getDateIn(), booking.getDateOut()) ) {
 				booking.setRoom(each);
@@ -154,11 +154,11 @@ public class OnlineBookingAction extends ActionSupport implements SessionAware{
 				images = new ArrayList<Image>();
 				images = this.getImageService().findCheckedByIdRoom(each.getId(),0,10);
 				each.setImages(images);
-				rooms.add(each);
+				beds.add(each);
 			}
 		}	
 		booking.setRoom(null);
-		this.setRooms(rooms);
+		this.setRooms(beds);
 		this.setBooking(booking);
 		return SUCCESS;
 	}
@@ -171,7 +171,7 @@ public class OnlineBookingAction extends ActionSupport implements SessionAware{
 	})
 	public String goOnlineBookingExtras(){
 		Structure structure = null;
-		Room theBookedRoom = null;
+		Bed theBookedRoom = null;
 		Double roomSubtotal = 0.0;
 		Booking booking = null;		
 		
@@ -310,11 +310,11 @@ public class OnlineBookingAction extends ActionSupport implements SessionAware{
 	public Integer getNumNights() {
 		return numNights;
 	}
-	public List<Room> getRooms() {
-		return rooms;
+	public List<Bed> getRooms() {
+		return beds;
 	}
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
+	public void setRooms(List<Bed> beds) {
+		this.beds = beds;
 	}
 	public Map<String, Object> getSession() {
 		return session;

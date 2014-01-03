@@ -41,9 +41,9 @@ import com.startuphouse.booking.model.File;
 import com.startuphouse.booking.model.Image;
 import com.startuphouse.booking.service.FacilityImageService;
 import com.startuphouse.booking.service.ImageService;
-import com.startuphouse.booking.service.RoomImageService;
+import com.startuphouse.booking.service.BedImageService;
 import com.startuphouse.booking.service.RoomTypeImageService;
-import com.startuphouse.booking.service.RoomTypeService;
+import com.startuphouse.booking.service.BedTypeService;
 import com.startuphouse.booking.service.StructureImageService;
 import com.sun.jersey.api.NotFoundException;
 import com.sun.jersey.core.header.FormDataContentDisposition;
@@ -61,7 +61,7 @@ public class RoomTypeImageResource {
 	@Autowired
 	private RoomTypeImageService roomTypeImageService = null;
 	@Autowired
-	private RoomTypeService roomTypeService = null;	
+	private BedTypeService bedTypeService = null;	
 	
 	@GET
 	@Path("roomType/{idRoomType}/{offset}/{rownum}")
@@ -135,12 +135,12 @@ public class RoomTypeImageResource {
 		this.roomTypeImageService = roomTypeImageService;
 	}
 
-	public RoomTypeService getRoomTypeService() {
-		return roomTypeService;
+	public BedTypeService getRoomTypeService() {
+		return bedTypeService;
 	}
 
-	public void setRoomTypeService(RoomTypeService roomTypeService) {
-		this.roomTypeService = roomTypeService;
+	public void setRoomTypeService(BedTypeService bedTypeService) {
+		this.bedTypeService = bedTypeService;
 	}	
 	
 	

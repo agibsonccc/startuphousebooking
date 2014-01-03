@@ -21,12 +21,12 @@ In case of controversy the competent court is the Court of Cagliari (Italy).
     <cache/>
 	
 
-	<select id="findAll" resultType="com.startuphouse.booking.model.RoomType">
+	<select id="findAll" resultType="com.startuphouse.booking.model.BedType">
         <include refid="selectRoomType"/> 
     </select>
     
 
-	<select id="findRoomTypesByIdStructure" parameterType="int" resultType="com.startuphouse.booking.model.RoomType">
+	<select id="findRoomTypesByIdStructure" parameterType="int" resultType="com.startuphouse.booking.model.BedType">
         <include refid="selectRoomType"/>WHERE id_structure = #{id_structure}
     </select>
     
@@ -34,19 +34,19 @@ In case of controversy the competent court is the Court of Cagliari (Italy).
         <include refid="selectRoomTypeId"/>WHERE id_structure = #{id_structure}
     </select>
     
-    <select id="findRoomTypesByIdStructureAndOffsetAndRownum" parameterType="map" resultType="com.startuphouse.booking.model.RoomType">
+    <select id="findRoomTypesByIdStructureAndOffsetAndRownum" parameterType="map" resultType="com.startuphouse.booking.model.BedType">
         <include refid="selectRoomType"/> WHERE id_structure = #{id_structure} LIMIT #{offset}, #{rownum}
     </select>
     
-    <select id="findRoomTypeById" parameterType="int" resultType="com.startuphouse.booking.model.RoomType">
+    <select id="findRoomTypeById" parameterType="int" resultType="com.startuphouse.booking.model.BedType">
         <include refid="selectRoomType"/> WHERE id = #{id}
     </select>
     
-    <select id="findRoomTypeByIdStructureAndName" parameterType="map" resultType="com.startuphouse.booking.model.RoomType">
+    <select id="findRoomTypeByIdStructureAndName" parameterType="map" resultType="com.startuphouse.booking.model.BedType">
         <include refid="selectRoomType"/>WHERE id_structure = #{id_structure} AND name = #{name}
     </select>
     
-    <select id="search" parameterType="map" resultType="com.startuphouse.booking.model.RoomType">
+    <select id="search" parameterType="map" resultType="com.startuphouse.booking.model.BedType">
         <include refid="selectRoomType"/> 
         WHERE 
         id_structure = #{id_structure}
@@ -75,11 +75,11 @@ In case of controversy the competent court is the Court of Cagliari (Italy).
         SELECT id FROM roomType
     </sql>
 	
-    <insert id="insertRoomType" parameterType="com.startuphouse.booking.model.RoomType" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertRoomType" parameterType="com.startuphouse.booking.model.BedType" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO roomType(name,maxGuests,notes,id_structure) values(#{name},#{maxGuests},#{notes},#{id_structure})
     </insert>
     
-    <update id="updateRoomType" parameterType="com.startuphouse.booking.model.RoomType">
+    <update id="updateRoomType" parameterType="com.startuphouse.booking.model.BedType">
         UPDATE roomType set name = #{name},maxGuests = #{maxGuests}, notes = #{notes},id_structure = #{id_structure} WHERE id = #{id}
     </update>
     

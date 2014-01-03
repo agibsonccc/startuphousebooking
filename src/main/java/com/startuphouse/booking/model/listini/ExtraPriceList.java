@@ -20,14 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.startuphouse.booking.model.Extra;
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.BedType;
 
 
 public class ExtraPriceList implements Serializable{
 	
 	private Integer id;
 	
-	private RoomType roomType;
+	private BedType bedType;
 	private Season season;
 	private Convention convention;
 	private List<ExtraPriceListItem> items;
@@ -87,11 +87,11 @@ public class ExtraPriceList implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public RoomType getRoomType() {
-		return roomType;
+	public BedType getRoomType() {
+		return bedType;
 	}
-	public void setRoomType(RoomType roomType) {
-		this.roomType = roomType;
+	public void setRoomType(BedType bedType) {
+		this.bedType = bedType;
 	}
 	public Convention getConvention() {
 		return convention;

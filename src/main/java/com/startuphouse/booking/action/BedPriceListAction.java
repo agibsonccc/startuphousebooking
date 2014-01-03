@@ -25,6 +25,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Actions;
@@ -38,7 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.startuphouse.booking.model.Booking;
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.BedType;
 import com.startuphouse.booking.model.UserAware;
 import com.startuphouse.booking.model.internal.Message;
 import com.startuphouse.booking.model.internal.TreeNode;
@@ -48,15 +49,14 @@ import com.startuphouse.booking.model.listini.RoomPriceListItem;
 import com.startuphouse.booking.model.listini.Season;
 import com.startuphouse.booking.service.ConventionService;
 import com.startuphouse.booking.service.RoomPriceListService;
-import com.startuphouse.booking.service.RoomTypeService;
-import com.startuphouse.booking.service.SeasonService;
+import com.startuphouse.booking.service.BedTypeService;
 
 @ParentPackage( value="default")
 @InterceptorRefs({
 	@InterceptorRef("userAwareStack")    
 })
 @Result(name="notLogged", location="/WEB-INF/jsp/homeNotLogged.jsp")
-public class RoomPriceListAction extends ActionSupport implements SessionAware,UserAware{
+public class BedPriceListAction extends ActionSupport implements SessionAware,UserAware{
 	private Map<String, Object> session = null;
 	private Message message = new Message();
 	private Booking booking = null;
@@ -68,12 +68,11 @@ public class RoomPriceListAction extends ActionSupport implements SessionAware,U
 	private Integer roomTypeId = null;
 	private Integer conventionId = null;
 	private Integer idStructure;
-	@Autowired
-	private SeasonService seasonService = null;
+	
 	@Autowired
 	private RoomPriceListService roomPriceListService = null;
 	@Autowired
-	private RoomTypeService roomTypeService = null;
+	private BedTypeService bedTypeService = null;
 	@Autowired
 	private ConventionService conventionService = null;
 	
@@ -110,7 +109,8 @@ public class RoomPriceListAction extends ActionSupport implements SessionAware,U
 		})
 	})
 	public String findAllRoomPriceLists() {
-		Set<Integer> years = null; 
+		throw new NotImplementedException();
+		/*Set<Integer> years = null; 
 		ServletContext context = null;
 		String webappPath = null;
 		
@@ -139,7 +139,7 @@ public class RoomPriceListAction extends ActionSupport implements SessionAware,U
 				}	
 			}
 			for (TreeNode eachNode2 : eachNode1.getChildren()) {		//For each season, building level-3 nodes - room types
-				for (RoomType eachRoomType : this.getRoomTypeService().findRoomTypesByIdStructure(this.getIdStructure())) {
+				for (BedType eachRoomType : this.getRoomTypeService().findRoomTypesByIdStructure(this.getIdStructure())) {
 					if (this.getConventionService().findConventionsByIdStructure(this.getIdStructure()).size() == 0) {	//Without conventions, click on a room type node must link to a blank page
 						String href = webappPath + "/toBlankPage";
 						eachNode2.buildChild(eachRoomType.getName(), eachRoomType.getId(), href);
@@ -160,7 +160,7 @@ public class RoomPriceListAction extends ActionSupport implements SessionAware,U
 		}
 		this.getMessage().setResult(Message.SUCCESS);
 		this.getMessage().setDescription(getText("priceListTreeSuccessAction"));
-		return SUCCESS;
+		return SUCCESS;*/
 	}
 	
 	@Actions({
@@ -256,23 +256,18 @@ public class RoomPriceListAction extends ActionSupport implements SessionAware,U
 	public void setConventionId(Integer conventionId) {
 		this.conventionId = conventionId;
 	}
-	public SeasonService getSeasonService() {
-		return seasonService;
-	}
-	public void setSeasonService(SeasonService seasonService) {
-		this.seasonService = seasonService;
-	}
+	
 	public RoomPriceListService getRoomPriceListService() {
 		return roomPriceListService;
 	}
 	public void setRoomPriceListService(RoomPriceListService roomPriceListService) {
 		this.roomPriceListService = roomPriceListService;
 	}
-	public RoomTypeService getRoomTypeService() {
-		return roomTypeService;
+	public BedTypeService getRoomTypeService() {
+		return bedTypeService;
 	}
-	public void setRoomTypeService(RoomTypeService roomTypeService) {
-		this.roomTypeService = roomTypeService;
+	public void setRoomTypeService(BedTypeService bedTypeService) {
+		this.bedTypeService = bedTypeService;
 	}
 	public ConventionService getConventionService() {
 		return conventionService;

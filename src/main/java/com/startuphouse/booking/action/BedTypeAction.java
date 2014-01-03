@@ -34,19 +34,19 @@ import com.startuphouse.booking.model.UserAware;
 	@InterceptorRef("userAwareStack")    
 })
 @Result(name="notLogged", location="/WEB-INF/jsp/homeNotLogged.jsp")
-public class RoomTypeAction extends ActionSupport implements SessionAware,UserAware{
+public class BedTypeAction extends ActionSupport implements SessionAware,UserAware{
 	private Map<String, Object> session = null;
 	private Integer idStructure;
 //	private Message message = new Message();
-//	private List<RoomType> roomTypes;
-//	private RoomType roomType = null;
+//	private List<BedType> roomTypes;
+//	private BedType roomType = null;
 //	private Image image = null;
 //	private List<Facility> facilities = null;
 //	private List roomTypeFacilitiesIds = new ArrayList();
 //	@Autowired
 //	private StructureService structureService = null;
 //	@Autowired
-//	private RoomTypeService roomTypeService;
+//	private BedTypeService roomTypeService;
 //	@Autowired
 //	private ImageService imageService = null;
 //	@Autowired
@@ -64,10 +64,10 @@ public class RoomTypeAction extends ActionSupport implements SessionAware,UserAw
 				}) 
 	})
 	public String findAllRoomTypes() {
-//		List<RoomType> roomTypes = null;
+//		List<BedType> roomTypes = null;
 //		
 //		roomTypes = this.getRoomTypeService().findRoomTypesByIdStructure(this.getIdStructure());
-//		for(RoomType each: roomTypes){
+//		for(BedType each: roomTypes){
 //			each.setImages(this.getImageService().findCheckedByIdRoomType(each.getId(),0,100));
 //		}
 //		this.setRoomTypes(roomTypes);
@@ -81,7 +81,7 @@ public class RoomTypeAction extends ActionSupport implements SessionAware,UserAw
 //		})		
 //	})
 //	public String goUpdateRoomType() {
-//		RoomType roomType = null;
+//		BedType roomType = null;
 //				
 //		roomType = this.getRoomTypeService().findRoomTypeById(this.getRoomType().getId());
 //		roomType.setFacilities(
@@ -103,7 +103,7 @@ public class RoomTypeAction extends ActionSupport implements SessionAware,UserAw
 //		})
 //	})
 //	public String saveUpdateRoomType(){
-//		RoomType oldRoomtype = null;
+//		BedType oldRoomtype = null;
 //		List<Facility> checkedFacilities = null;
 //		List<Integer> filteredRoomTypeFacilitesIds = null;
 //		Integer anInt;
@@ -204,16 +204,16 @@ public class RoomTypeAction extends ActionSupport implements SessionAware,UserAw
 //	public void setMessage(Message message) {
 //		this.message = message;
 //	}
-//	public List<RoomType> getRoomTypes() {
+//	public List<BedType> getRoomTypes() {
 //		return roomTypes;
 //	}
-//	public void setRoomTypes(List<RoomType> roomTypes) {
+//	public void setRoomTypes(List<BedType> roomTypes) {
 //		this.roomTypes = roomTypes;
 //	}
-//	public RoomType getRoomType() {
+//	public BedType getRoomType() {
 //		return roomType;
 //	}
-//	public void setRoomType(RoomType roomType) {
+//	public void setRoomType(BedType roomType) {
 //		this.roomType = roomType;
 //	}
 //	public Image getImage() {
@@ -240,10 +240,10 @@ public class RoomTypeAction extends ActionSupport implements SessionAware,UserAw
 //	public void setStructureService(StructureService structureService) {
 //		this.structureService = structureService;
 //	}
-//	public RoomTypeService getRoomTypeService() {
+//	public BedTypeService getRoomTypeService() {
 //		return roomTypeService;
 //	}
-//	public void setRoomTypeService(RoomTypeService roomTypeService) {
+//	public void setRoomTypeService(BedTypeService roomTypeService) {
 //		this.roomTypeService = roomTypeService;
 //	}
 //	public ImageService getImageService() {

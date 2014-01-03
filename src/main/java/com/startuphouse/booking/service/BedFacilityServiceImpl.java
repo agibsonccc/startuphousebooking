@@ -38,7 +38,7 @@ import com.startuphouse.booking.persistence.mybatis.mappers.StructureFacilityMap
 
 
 @Service
-public class RoomFacilityServiceImpl implements RoomFacilityService{
+public class BedFacilityServiceImpl implements BedFacilityService{
 	@Autowired
 	private RoomFacilityMapper roomFacilityMapper = null;		
 			

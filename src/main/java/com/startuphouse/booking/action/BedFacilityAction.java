@@ -32,7 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.startuphouse.booking.model.Facility;
-import com.startuphouse.booking.model.Room;
+import com.startuphouse.booking.model.Bed;
 import com.startuphouse.booking.model.UserAware;
 import com.startuphouse.booking.model.internal.Message;
 import com.startuphouse.booking.service.FacilityService;
@@ -44,12 +44,12 @@ import com.startuphouse.booking.service.StructureService;
 	@InterceptorRef("userAwareStack")    
 })
 @Result(name="notLogged", location="/WEB-INF/jsp/homeNotLogged.jsp")
-public class RoomFacilityAction extends ActionSupport implements SessionAware,UserAware{
+public class BedFacilityAction extends ActionSupport implements SessionAware,UserAware{
 	private Map<String, Object> session = null;
 	private List<Facility> roomFacilities = null;
 	private List<Integer> roomFacilitiesIds = new ArrayList<Integer>();
 	private Integer idRoom;
-	private Room room = null;
+	private Bed bed = null;
 	private Message message = new Message();
 	private Facility facility;
 	private Integer idStructure;
@@ -116,10 +116,10 @@ public class RoomFacilityAction extends ActionSupport implements SessionAware,Us
 	@Actions({
 		@Action(value="/updateFacility", results={
 				@Result(type ="json",name="success", params={
-						"excludeProperties","session,roomFacilities,roomFacilitiesIds,idRoom,room,structureService,roomService,facilityService"
+						"excludeProperties","session,roomFacilities,roomFacilitiesIds,idRoom,bed,structureService,roomService,facilityService"
 				}),
 				@Result(type ="json",name="error", params={
-						"excludeProperties","session,roomFacilities,roomFacilitiesIds,idRoom,room,structureService,roomService,facilityService"
+						"excludeProperties","session,roomFacilities,roomFacilitiesIds,idRoom,bed,structureService,roomService,facilityService"
 				})	
 			})
 	})
@@ -155,11 +155,11 @@ public class RoomFacilityAction extends ActionSupport implements SessionAware,Us
 	public void setIdRoom(Integer idRoom) {
 		this.idRoom = idRoom;
 	}
-	public Room getRoom() {
-		return room;
+	public Bed getRoom() {
+		return bed;
 	}
-	public void setRoom(Room room) {
-		this.room = room;
+	public void setRoom(Bed bed) {
+		this.bed = bed;
 	}
 	public Message getMessage() {
 		return message;

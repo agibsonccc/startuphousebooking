@@ -32,7 +32,7 @@ public class Booking implements Serializable{
 	
 	private Guest booker;
 	private Integer nrGuests = 1;
-	private Room room;
+	private Bed bed;
 	private Date dateIn;
 	private Date dateOut;
 	private Double roomSubtotal = 0.0;
@@ -116,19 +116,19 @@ public class Booking implements Serializable{
 		numNights = this.calculateNumNights();
 		System.out.println(extra.getTimePriceType());	
 		if (extra.getTimePriceType().equals("per Night")) {
-			if (extra.getResourcePriceType().equals("per Room")) {
+			if (extra.getResourcePriceType().equals("per Bed")) {
 				ret = numNights;
 			}
 			else ret = numNights * this.getNrGuests(); 			//per Person - "per Item" cannot exist
 		}
 		else if (extra.getTimePriceType().equals("per Week")) {
-			if (extra.getResourcePriceType().equals("per Room")) {
+			if (extra.getResourcePriceType().equals("per Bed")) {
 				ret = numNights/7 + 1;						//per week extra cannot be "divided"
 			}
 			else ret = (numNights/7 + 1) * this.getNrGuests();	//per Person - "per Item" cannot exist
 		}else {												//per Booking
-			if (extra.getResourcePriceType().equals("per Room")) {
-				ret = 1;									//So far, a Booking is associated with only one Room
+			if (extra.getResourcePriceType().equals("per Bed")) {
+				ret = 1;									//So far, a Booking is associated with only one Bed
 			}
 			else if (extra.getResourcePriceType().equals("per Person")) {
 				ret = this.getNrGuests();
@@ -254,11 +254,11 @@ public class Booking implements Serializable{
 	public void setNrGuests(Integer nrGuests) {
 		this.nrGuests = nrGuests;
 	}
-	public Room getRoom() {
-		return room;
+	public Bed getRoom() {
+		return bed;
 	}
-	public void setRoom(Room room) {
-		this.room = room;
+	public void setRoom(Bed bed) {
+		this.bed = bed;
 	}
 	public Date getDateIn() {
 		return dateIn;

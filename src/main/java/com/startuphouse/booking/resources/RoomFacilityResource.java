@@ -24,10 +24,10 @@ import com.startuphouse.booking.model.Facility;
 import com.startuphouse.booking.model.Image;
 import com.startuphouse.booking.service.FacilityService;
 import com.startuphouse.booking.service.ImageService;
-import com.startuphouse.booking.service.RoomFacilityService;
+import com.startuphouse.booking.service.BedFacilityService;
 import com.startuphouse.booking.service.RoomService;
 import com.startuphouse.booking.service.RoomTypeFacilityService;
-import com.startuphouse.booking.service.RoomTypeService;
+import com.startuphouse.booking.service.BedTypeService;
 import com.startuphouse.booking.service.StructureFacilityService;
 import com.startuphouse.booking.service.StructureImageService;
 import com.sun.jersey.api.NotFoundException;
@@ -40,7 +40,7 @@ public class RoomFacilityResource {
 	@Autowired
 	private FacilityService facilityService = null;
 	@Autowired
-	private RoomFacilityService roomFacilityService = null;
+	private BedFacilityService bedFacilityService = null;
 	@Autowired
 	private RoomService roomService = null;
 	
@@ -113,13 +113,13 @@ public class RoomFacilityResource {
 	}
 
 
-	public RoomFacilityService getRoomFacilityService() {
-		return roomFacilityService;
+	public BedFacilityService getRoomFacilityService() {
+		return bedFacilityService;
 	}
 
 
-	public void setRoomFacilityService(RoomFacilityService roomFacilityService) {
-		this.roomFacilityService = roomFacilityService;
+	public void setRoomFacilityService(BedFacilityService bedFacilityService) {
+		this.bedFacilityService = bedFacilityService;
 	}
 
 

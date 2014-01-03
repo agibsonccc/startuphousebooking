@@ -26,7 +26,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Room implements Serializable{
+public class Bed implements Serializable{
 	
 	@Field
 	private Integer id;
@@ -35,7 +35,7 @@ public class Room implements Serializable{
 	private Double price;
 	@Field
 	private String notes;
-	private RoomType roomType;
+	private BedType bedType;
 	private Integer id_roomType;
 	private List<Facility> facilities;
 	private List<Image> images;
@@ -43,7 +43,7 @@ public class Room implements Serializable{
 	private Integer id_structure;
 	
 	
-	public Room(){
+	public Bed(){
 		this.facilities = new ArrayList<Facility>();
 		this.images = new ArrayList<Image>();
 	}
@@ -80,7 +80,7 @@ public class Room implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Room other = (Room) obj;
+		Bed other = (Bed) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -118,11 +118,11 @@ public class Room implements Serializable{
 	public void setFacilities(List<Facility> facilities) {
 		this.facilities = facilities;
 	}
-	public RoomType getRoomType() {
-		return roomType;
+	public BedType getRoomType() {
+		return bedType;
 	}
-	public void setRoomType(RoomType roomType) {
-		this.roomType = roomType;
+	public void setRoomType(BedType bedType) {
+		this.bedType = bedType;
 	}
 	public List<Image> getImages() {
 		return images;

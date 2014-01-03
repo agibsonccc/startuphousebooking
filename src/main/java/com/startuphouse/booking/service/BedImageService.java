@@ -16,28 +16,23 @@
 package com.startuphouse.booking.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.Image;
+
 
 @Transactional
-public interface RoomTypeService {
+public interface BedImageService {	
+	public Integer insert(Integer id_room,Integer id_image);
 	
-	public Integer insertRoomType(RoomType roomType);
-	public Integer updateRoomType(RoomType roomType);
-	public Integer deleteRoomType(Integer id);
+	public List<Integer> findIdImageByIdRoom(Integer id_room,Integer offset, Integer rownum);
+	public Integer findIdByIdRoomAndIdImage(Integer id_room, Integer id_image );
 	
-	public List<RoomType> findAll();
-	public List<RoomType> findRoomTypesByIdStructure(Integer id_structure);
-	public List<Integer> findRoomTypeIdsByIdStructure(Integer id_structure);
+	public Integer delete(Integer id);
+	public Integer deleteByIdImage(Integer id_image);	
+	public Integer deleteByIdRoom(Integer id_room);	
 	
 	
-	public List<RoomType> findRoomTypesByIdStructure(Integer id_structure,Integer offset,Integer rownum);
-	
-	public RoomType findRoomTypeById(Integer id);
-	public RoomType findRoomTypeByIdStructureAndName(Integer id_structure, String name);
-	
-	public Integer findIdStructureByIdRoomType(Integer idRoomType);
 }

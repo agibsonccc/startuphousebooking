@@ -30,7 +30,7 @@ import com.startuphouse.booking.persistence.mybatis.mappers.RoomPriceListMapper;
 
 
 @Service
-public class RoomPriceListServiceImpl implements RoomPriceListService{
+public class BedPriceListServiceImpl implements RoomPriceListService{
 	@Autowired
 	private RoomPriceListMapper roomPriceListMapper;
 	@Autowired

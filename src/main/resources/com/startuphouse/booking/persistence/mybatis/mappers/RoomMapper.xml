@@ -20,11 +20,11 @@ In case of controversy the competent court is the Court of Cagliari (Italy).
 <mapper namespace="com.startuphouse.booking.persistence.mybatis.mappers.RoomMapper">
     <cache/>
 	
-    <insert id="insertRoom" parameterType="com.startuphouse.booking.model.Room" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertRoom" parameterType="com.startuphouse.booking.model.Bed" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO room(name,notes,id_roomType,id_structure) values(#{name},#{notes},#{id_roomType},#{id_structure})
     </insert>
     
-    <update id="updateRoom" parameterType="com.startuphouse.booking.model.Room">
+    <update id="updateRoom" parameterType="com.startuphouse.booking.model.Bed">
         UPDATE room set name = #{name},notes = #{notes},id_roomType = #{id_roomType},id_structure = #{id_structure} WHERE id = #{id}
     </update>
     
@@ -32,11 +32,11 @@ In case of controversy the competent court is the Court of Cagliari (Italy).
         DELETE FROM room WHERE id = #{id}
     </delete>
     
-    <select id="findAll" resultType="com.startuphouse.booking.model.Room">
+    <select id="findAll" resultType="com.startuphouse.booking.model.Bed">
         <include refid="selectRoom"/> 
     </select>
     
-    <select id="findRoomsByIdStructure" parameterType="int" resultType="com.startuphouse.booking.model.Room">
+    <select id="findRoomsByIdStructure" parameterType="int" resultType="com.startuphouse.booking.model.Bed">
         <include refid="selectRoom"/>WHERE id_structure = #{id_structure}
     </select>
     
@@ -44,19 +44,19 @@ In case of controversy the competent court is the Court of Cagliari (Italy).
         <include refid="selectRoomId"/>WHERE id_structure = #{id_structure}
     </select>
     
-    <select id="findRoomsByIdStructureAndOffsetAndRownum" parameterType="map" resultType="com.startuphouse.booking.model.Room">
+    <select id="findRoomsByIdStructureAndOffsetAndRownum" parameterType="map" resultType="com.startuphouse.booking.model.Bed">
         <include refid="selectRoom"/>WHERE id_structure = #{id_structure} LIMIT #{offset}, #{rownum}
     </select>
     
-    <select id="findRoomById" parameterType="int" resultType="com.startuphouse.booking.model.Room">
+    <select id="findRoomById" parameterType="int" resultType="com.startuphouse.booking.model.Bed">
         <include refid="selectRoom"/>WHERE id = #{id}
     </select>
     
-    <select id="findRoomByIdStructureAndName" parameterType="map" resultType="com.startuphouse.booking.model.Room">
+    <select id="findRoomByIdStructureAndName" parameterType="map" resultType="com.startuphouse.booking.model.Bed">
         <include refid="selectRoom"/>WHERE id_structure = #{id_structure} AND name = #{name}
     </select>
     
-    <select id="findRoomsByIdRoomType" parameterType="int" resultType="com.startuphouse.booking.model.Room">
+    <select id="findRoomsByIdRoomType" parameterType="int" resultType="com.startuphouse.booking.model.Bed">
         <include refid="selectRoom"/>WHERE id_roomType = #{id_roomType}
     </select>
     

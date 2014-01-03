@@ -25,6 +25,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Actions;
@@ -38,7 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.startuphouse.booking.model.Booking;
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.BedType;
 import com.startuphouse.booking.model.UserAware;
 import com.startuphouse.booking.model.internal.Message;
 import com.startuphouse.booking.model.internal.TreeNode;
@@ -48,8 +49,7 @@ import com.startuphouse.booking.model.listini.ExtraPriceListItem;
 import com.startuphouse.booking.model.listini.Season;
 import com.startuphouse.booking.service.ConventionService;
 import com.startuphouse.booking.service.ExtraPriceListService;
-import com.startuphouse.booking.service.RoomTypeService;
-import com.startuphouse.booking.service.SeasonService;
+import com.startuphouse.booking.service.BedTypeService;
 
 @ParentPackage( value="default")
 @InterceptorRefs({
@@ -69,9 +69,7 @@ public class ExtraPriceListAction extends ActionSupport implements SessionAware,
 	private Integer conventionId = null;
 	private Integer idStructure;
 	@Autowired
-	private SeasonService seasonService = null;
-	@Autowired
-	private RoomTypeService roomTypeService = null;
+	private BedTypeService bedTypeService = null;
 	@Autowired
 	private ConventionService conventionService = null;
 	@Autowired
@@ -95,8 +93,8 @@ public class ExtraPriceListAction extends ActionSupport implements SessionAware,
 		})
 	})
 	public String findAllExtraPriceLists() {
-		
-		Set<Integer> years = null;
+		throw new NotImplementedException();
+	/*	Set<Integer> years = null;
 		ServletContext context = null; 
 		String webappPath = null;
 		
@@ -125,7 +123,7 @@ public class ExtraPriceListAction extends ActionSupport implements SessionAware,
 				}
 			}
 			for (TreeNode eachNode2 : eachNode1.getChildren()) {		//For each season, building level-3 nodes - room types
-				for (RoomType eachRoomType : this.getRoomTypeService().findRoomTypesByIdStructure(this.getIdStructure())) {
+				for (BedType eachRoomType : this.getRoomTypeService().findRoomTypesByIdStructure(this.getIdStructure())) {
 					if (this.getConventionService().findConventionsByIdStructure(this.getIdStructure()).size() == 0) {	//Without conventions, click on a room type node must link to a blank page
 						String href = webappPath + "/toBlankPage";
 						eachNode2.buildChild(eachRoomType.getName(), eachRoomType.getId(), href);
@@ -144,7 +142,7 @@ public class ExtraPriceListAction extends ActionSupport implements SessionAware,
 					}			
 			}
 		}
-		return SUCCESS;
+		return SUCCESS;*/
 	}
 	
 	@Actions({
@@ -241,17 +239,12 @@ public class ExtraPriceListAction extends ActionSupport implements SessionAware,
 	public void setConventionId(Integer conventionId) {
 		this.conventionId = conventionId;
 	}
-	public SeasonService getSeasonService() {
-		return seasonService;
+	
+	public BedTypeService getRoomTypeService() {
+		return bedTypeService;
 	}
-	public void setSeasonService(SeasonService seasonService) {
-		this.seasonService = seasonService;
-	}
-	public RoomTypeService getRoomTypeService() {
-		return roomTypeService;
-	}
-	public void setRoomTypeService(RoomTypeService roomTypeService) {
-		this.roomTypeService = roomTypeService;
+	public void setRoomTypeService(BedTypeService bedTypeService) {
+		this.bedTypeService = bedTypeService;
 	}
 	public ConventionService getConventionService() {
 		return conventionService;

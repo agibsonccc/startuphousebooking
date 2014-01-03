@@ -23,67 +23,70 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.startuphouse.booking.persistence.mybatis.mappers.RoomImageMapper;
+import com.startuphouse.booking.persistence.mybatis.mappers.RoomTypeImageMapper;
 
 
 @Service
-public class RoomImageServiceImpl implements RoomImageService{
+public class BedTypeImageServiceImpl implements RoomTypeImageService{
 	@Autowired
-	private RoomImageMapper roomImageMapper = null;
+	private RoomTypeImageMapper roomTypeImageMapper = null;
 		
 	@Override
-	public Integer insert(Integer id_room, Integer id_image) {
+	public Integer insert(Integer id_roomType, Integer id_image) {
 		Map map = null;		
 		
 		map = new HashMap();
-		map.put("id_room",id_room );
+		map.put("id_roomType",id_roomType );
 		map.put("id_image",id_image);
-		return this.getRoomImageMapper().insert(map);
-	}	
+		return this.getRoomTypeImageMapper().insert(map);
+	}
 	
 	@Override
-	public List<Integer> findIdImageByIdRoom(Integer id_room,Integer offset, Integer rownum) {
+	public List<Integer> findIdImageByIdRoomType(Integer id_roomType, Integer offset, Integer rownum) {
 		List<Integer> ret = null;
 		Map map = null;
 		
 		ret = new ArrayList<Integer>();
 		map = new HashMap();
-		map.put("id_room",id_room );
+		map.put("id_roomType",id_roomType );
 		map.put("offset",offset );
-		map.put("rownum",rownum );
-		for(Map each: this.getRoomImageMapper().findByIdRoom(map)){
+		map.put("rownum", rownum);
+		for(Map each: this.getRoomTypeImageMapper().findByIdRoomType(map)){
 			ret.add((Integer)each.get("id_image"));
 		}
 		return ret;
 	}
 	
 	@Override
-	public Integer findIdByIdRoomAndIdImage(Integer id_room, Integer id_image) {
+	public Integer findIdByIdRoomTypeAndIdImage(Integer id_roomType, Integer id_image) {
 		Map map = null;
 		
 		map = new HashMap();
-		map.put("id_room", id_room);
+		map.put("id_roomType", id_roomType);
 		map.put("id_image", id_image);	
-		return this.getRoomImageMapper().findIdByIdRoomAndIdImage(map);
+		return this.getRoomTypeImageMapper().findIdByIdRoomTypeAndIdImage(map);
 	}
 
 	@Override
-	public Integer delete(Integer id) {		
-		return this.getRoomImageMapper().delete(id);
+	public Integer delete(Integer id) {
+		return this.getRoomTypeImageMapper().delete(id);
 	}
+
 	@Override
-	public Integer deleteByIdImage(Integer id_image) {		
-		return this.getRoomImageMapper().deleteByIdImage(id_image);
+	public Integer deleteByIdImage(Integer id_image) {
+		return this.getRoomTypeImageMapper().deleteByIdImage(id_image);
 	}
+
 	@Override
-	public Integer deleteByIdRoom(Integer id_room) {		
-		return this.getRoomImageMapper().deleteByIdRoom(id_room);
+	public Integer deleteByIdRoomType(Integer id_roomType) {
+		return this.getRoomTypeImageMapper().deleteByIdRoomType(id_roomType);
 	}
-	public RoomImageMapper getRoomImageMapper() {
-		return roomImageMapper;
+
+	public RoomTypeImageMapper getRoomTypeImageMapper() {
+		return roomTypeImageMapper;
 	}
-	public void setRoomImageMapper(RoomImageMapper roomImageMapper) {
-		this.roomImageMapper = roomImageMapper;
+	public void setRoomTypeImageMapper(RoomTypeImageMapper roomTypeImageMapper) {
+		this.roomTypeImageMapper = roomTypeImageMapper;
 	}
 	
 }

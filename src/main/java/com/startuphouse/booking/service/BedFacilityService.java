@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.startuphouse.booking.model.Facility;
 
 @Transactional
-public interface RoomFacilityService {	
+public interface BedFacilityService {	
 	public Integer insert(Integer id_room,Integer id_facility);		
 	public List<Integer> findIdFacilityByIdRoom(Integer id_room,Integer offset, Integer rownum);	
 	public Integer findIdByIdRoomAndIdFacility(Integer id_room,Integer id_facility);

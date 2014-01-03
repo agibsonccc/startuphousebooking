@@ -19,23 +19,23 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.startuphouse.booking.model.Room;
+import com.startuphouse.booking.model.Bed;
 
 @Transactional
 public interface RoomService {
 	
-	public Integer insertRoom(Room room);
-	public Integer updateRoom(Room room);
+	public Integer insertRoom(Bed bed);
+	public Integer updateRoom(Bed bed);
 	public Integer deleteRoom(Integer id);
 	public Integer countRoomsByIdRoomType(Integer id_roomType);
 	
-	public List<Room> findAll();
-	public List<Room> findRoomsByIdStructure(Integer id_structure);
+	public List<Bed> findAll();
+	public List<Bed> findRoomsByIdStructure(Integer id_structure);
 	public List<Integer> findRoomIdsByIdStructure(Integer id_structure);
-	public List<Room> findRoomsByIdStructure(Integer id_structure,Integer offset,Integer rownum);
-	public List<Room> findRoomsByIdRoomType(Integer id_roomType);
+	public List<Bed> findRoomsByIdStructure(Integer id_structure,Integer offset,Integer rownum);
+	public List<Bed> findRoomsByIdRoomType(Integer id_roomType);
 		
-	public Room findRoomById(Integer id);
-	public Room findRoomByIdStructureAndName(Integer id_structure, String name);
+	public Bed findRoomById(Integer id);
+	public Bed findRoomByIdStructureAndName(Integer id_structure, String name);
 	public Integer findIdStructureByIdRoom(Integer idRoom);
 }

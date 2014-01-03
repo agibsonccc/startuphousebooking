@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ import com.startuphouse.booking.model.Booking;
 import com.startuphouse.booking.model.ExtraItem;
 import com.startuphouse.booking.model.Guest;
 import com.startuphouse.booking.model.Payment;
-import com.startuphouse.booking.model.Room;
+import com.startuphouse.booking.model.Bed;
 import com.startuphouse.booking.model.listini.Convention;
 import com.startuphouse.booking.model.listini.RoomPriceList;
 import com.startuphouse.booking.model.listini.Season;
@@ -39,8 +40,6 @@ import com.startuphouse.booking.persistence.mybatis.mappers.BookingMapper;
 public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private RoomPriceListService roomPriceListService = null;
-	@Autowired
-	private SeasonService seasonService = null;
 	@Autowired
 	private BookingMapper bookingMapper = null;
 	@Autowired
@@ -66,7 +65,7 @@ public class BookingServiceImpl implements BookingService {
 		List<Adjustment> adjustments = null;
 		List<Payment> payments = null;
 		Convention convention = null;
-		Room room = null;
+		Bed bed = null;
 		
 		booking = this.getBookingMapper().findBookingById(id);
 		
@@ -83,8 +82,8 @@ public class BookingServiceImpl implements BookingService {
 		payments = this.getPaymentService().findPaymentsByIdBooking(id);
 		booking.setPayments(payments);
 		
-		room = this.getRoomService().findRoomById(booking.getId_room());
-		booking.setRoom(room);
+		bed = this.getRoomService().findRoomById(booking.getId_room());
+		booking.setRoom(bed);
 		
 		convention = this.getConventionService().findConventionById(booking.getId_convention());
 		booking.setConvention(convention);
@@ -150,7 +149,8 @@ public class BookingServiceImpl implements BookingService {
 	
 	@Override
 	public Integer countBookingsByIdSeason(Integer id_season) {
-		List<Booking> allStructureBookings = null;
+		throw new NotImplementedException();
+		/*List<Booking> allStructureBookings = null;
 		List<Booking> bookings = new ArrayList<Booking>();
 		List<Date> bookingDates = null;
 		Season season = null;
@@ -165,7 +165,7 @@ public class BookingServiceImpl implements BookingService {
 				}
 			}
 		}
-		return bookings.size();
+		return bookings.size();*/
 	}
 
 	@Override
@@ -223,7 +223,8 @@ public class BookingServiceImpl implements BookingService {
 	}
 	
 	public Double calculateRoomSubtotalForBooking(Integer id_structure, Booking booking) {
-		Double ret = 0.0;
+		throw new NotImplementedException();
+		/*Double ret = 0.0;
 		List<Date> bookingDates = null;
 		RoomPriceList listinoCameraDelGiorno;
 		Season season = null;
@@ -243,7 +244,7 @@ public class BookingServiceImpl implements BookingService {
 			dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 			ret = ret + listinoCameraDelGiorno.findRoomPrice(booking.getNrGuests(), dayOfWeek);
 		}			
-		return ret;
+		return ret;*/
 	}
 	
 	public Integer saveOnlineBooking(Booking booking) {
@@ -271,12 +272,7 @@ public class BookingServiceImpl implements BookingService {
 	public void setRoomPriceListService(RoomPriceListService roomPriceListService) {
 		this.roomPriceListService = roomPriceListService;
 	}
-	public SeasonService getSeasonService() {
-		return seasonService;
-	}
-	public void setSeasonService(SeasonService seasonService) {
-		this.seasonService = seasonService;
-	}
+	
 	public BookingMapper getBookingMapper() {
 		return bookingMapper;
 	}

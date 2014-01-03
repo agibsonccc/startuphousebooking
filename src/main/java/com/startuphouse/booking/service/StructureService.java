@@ -22,14 +22,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.startuphouse.booking.model.Booking;
 import com.startuphouse.booking.model.Extra;
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.BedType;
 import com.startuphouse.booking.model.Structure;
 import com.startuphouse.booking.model.listini.Convention;
 
 @Transactional
 public interface StructureService {
 	public List<Structure> findAll();
-	public Double calculateExtraItemUnitaryPrice(Integer id_structure, Date dateIn, Date dateOut, RoomType roomType, Convention convention, Extra extra);
+	public Double calculateExtraItemUnitaryPrice(Integer id_structure, Date dateIn, Date dateOut, BedType bedType, Convention convention, Extra extra);
 	
 	public void addPriceListsForSeason(Integer id_structure, Integer id_season);
 	public void addPriceListsForRoomType(Integer id_structure, Integer id_roomType);

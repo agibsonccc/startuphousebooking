@@ -20,12 +20,13 @@ import java.util.Date;
 import java.util.List;
 
 
+import org.apache.commons.lang.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.startuphouse.booking.model.Booking;
 import com.startuphouse.booking.model.Extra;
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.BedType;
 import com.startuphouse.booking.model.Structure;
 import com.startuphouse.booking.model.listini.Convention;
 import com.startuphouse.booking.model.listini.ExtraPriceList;
@@ -39,13 +40,11 @@ import com.startuphouse.booking.persistence.mybatis.mappers.StructureMapper;
 @Service
 public class StructureServiceImpl implements StructureService{
 	@Autowired
-	private SeasonService seasonService = null;
-	@Autowired
 	private RoomPriceListService roomPriceListService = null;
 	@Autowired
 	private ExtraPriceListService extraPriceListService = null;
 	@Autowired
-	private RoomTypeService roomTypeService = null;
+	private BedTypeService bedTypeService = null;
 	@Autowired
 	private BookingService bookingService = null;
 	@Autowired
@@ -103,7 +102,7 @@ public class StructureServiceImpl implements StructureService{
 		return ret;
 	}
 
-	public Double calculateExtraItemUnitaryPrice(Integer id_structure, Date dateIn, Date dateOut, RoomType roomType, Convention convention, Extra extra) {
+	public Double calculateExtraItemUnitaryPrice(Integer id_structure, Date dateIn, Date dateOut, BedType bedType, Convention convention, Extra extra) {
 		Double ret = 0.0;
 		ExtraPriceList priceList = null;
 		ExtraPriceList otherPriceList = null;
@@ -111,15 +110,15 @@ public class StructureServiceImpl implements StructureService{
 		Double price = 0.0;
 		Double otherPrice = 0.0;
 		
-		season = this.getSeasonService().findSeasonByDate(id_structure,dateIn );
+		//season = this.getSeasonService().findSeasonByDate(id_structure,dateIn );
 		priceList = this.getExtraPriceListService().findExtraPriceListByIdStructureAndIdSeasonAndIdRoomTypeAndIdConvention(
-				id_structure, season.getId(), roomType.getId(), convention.getId());
+				id_structure, season.getId(), bedType.getId(), convention.getId());
 		
 		price = priceList.findExtraPrice(extra);
 		
 		//If a booking covers more than one season, considers the lowest price
 		otherPriceList = this.getExtraPriceListService().findExtraPriceListByIdStructureAndIdSeasonAndIdRoomTypeAndIdConvention(
-				id_structure, season.getId(), roomType.getId(), convention.getId());
+				id_structure, season.getId(), bedType.getId(), convention.getId());
 		price = priceList.findExtraPrice(extra);
 		otherPrice = otherPriceList.findExtraPrice(extra);
 		
@@ -129,16 +128,16 @@ public class StructureServiceImpl implements StructureService{
 	}
 	
 	public void addPriceListsForSeason(Integer id_structure, Integer id_season) {
-		RoomPriceList newRoomPriceList = null;
+	
+		throw new NotImplementedException();
+		/*RoomPriceList newRoomPriceList = null;
 		ExtraPriceList newExtraPriceList = null;
 		RoomPriceListItem newRoomPriceListItem = null;
 		ExtraPriceListItem newExtraPriceListItem = null;
 		Double price = 0.0;
-		Season theNewSeason = null;
-
-		theNewSeason = this.getSeasonService().findSeasonById(id_season);
 		
-		for (RoomType eachRoomType : this.getRoomTypeService().findRoomTypesByIdStructure(id_structure)) {
+		
+		for (BedType eachRoomType : this.getRoomTypeService().findRoomTypesByIdStructure(id_structure)) {
 			for (Convention eachConvention : this.getConventionService().findConventionsByIdStructure(id_structure)) {
 				//RoomPriceList
 				newRoomPriceList = new RoomPriceList();
@@ -186,16 +185,17 @@ public class StructureServiceImpl implements StructureService{
 				newExtraPriceList.setItems(extraItems);
 				this.getExtraPriceListService().insertExtraPriceList(newExtraPriceList);
 			}
-		}
+		}*/
 	}
 	
 	public void addPriceListsForRoomType(Integer id_structure, Integer id_roomType) {
-		RoomPriceList newRoomPriceList = null;
+		throw new NotImplementedException();
+		/*RoomPriceList newRoomPriceList = null;
 		ExtraPriceList newExtraPriceList = null;
 		RoomPriceListItem newRoomPriceListItem = null;
 		ExtraPriceListItem newExtraPriceListItem = null;
 		Double price = 0.0;
-		RoomType theNewRoomType = null;
+		BedType theNewRoomType = null;
 
 		theNewRoomType = this.getRoomTypeService().findRoomTypeById(id_roomType);
 		
@@ -247,11 +247,13 @@ public class StructureServiceImpl implements StructureService{
 				newExtraPriceList.setItems(extraItems);
 				this.getExtraPriceListService().insertExtraPriceList(newExtraPriceList);
 			}
-		}
+		}*/
 	}
 	
 	public void addPriceListsForConvention(Integer id_structure, Integer id_convention) {
-		RoomPriceList newRoomPriceList = null;
+	
+		throw new NotImplementedException();
+		/*	RoomPriceList newRoomPriceList = null;
 		ExtraPriceList newExtraPriceList = null;
 		RoomPriceListItem newRoomPriceListItem = null;
 		ExtraPriceListItem newExtraPriceListItem = null;
@@ -261,7 +263,7 @@ public class StructureServiceImpl implements StructureService{
 		theNewConvention = this.getConventionService().findConventionById(id_convention);
 		
 		for (Season eachSeason : this.getSeasonService().findSeasonsByIdStructure(id_structure)) {
-			for (RoomType eachRoomType : this.getRoomTypeService().findRoomTypesByIdStructure(id_structure)) {
+			for (BedType eachRoomType : this.getRoomTypeService().findRoomTypesByIdStructure(id_structure)) {
 				//RoomPriceList
 				newRoomPriceList = new RoomPriceList();
 				newRoomPriceList.setId_structure(id_structure);
@@ -308,7 +310,7 @@ public class StructureServiceImpl implements StructureService{
 				newExtraPriceList.setItems(extraItems);
 				this.getExtraPriceListService().insertExtraPriceList(newExtraPriceList);
 			}
-		}
+		}*/
 	}
 	
 	public void modifyPriceListsForExtra(Integer id_structure, Integer id_extra) {
@@ -382,12 +384,7 @@ public class StructureServiceImpl implements StructureService{
 		return true;	
 	}
 	
-	public SeasonService getSeasonService() {
-		return seasonService;
-	}
-	public void setSeasonService(SeasonService seasonService) {
-		this.seasonService = seasonService;
-	}
+	
 	public RoomPriceListService getRoomPriceListService() {
 		return roomPriceListService;
 	}
@@ -400,11 +397,11 @@ public class StructureServiceImpl implements StructureService{
 	public void setExtraPriceListService(ExtraPriceListService extraPriceListService) {
 		this.extraPriceListService = extraPriceListService;
 	}
-	public RoomTypeService getRoomTypeService() {
-		return roomTypeService;
+	public BedTypeService getRoomTypeService() {
+		return bedTypeService;
 	}
-	public void setRoomTypeService(RoomTypeService roomTypeService) {
-		this.roomTypeService = roomTypeService;
+	public void setRoomTypeService(BedTypeService bedTypeService) {
+		this.bedTypeService = bedTypeService;
 	}
 	public BookingService getBookingService() {
 		return bookingService;

@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import com.startuphouse.booking.model.listini.Period;
 import com.startuphouse.booking.service.PeriodService;
-import com.startuphouse.booking.service.SeasonService;
 import com.startuphouse.booking.service.StructureService;
 import com.sun.jersey.api.NotFoundException;
 
@@ -32,9 +31,6 @@ public class PeriodResource {
 	private PeriodService periodService = null;
 	@Autowired
     private StructureService structureService = null;
-	@Autowired
-    private SeasonService seasonService = null;
-	
 	
 	@GET
 	@Path("{id}")
@@ -118,12 +114,7 @@ public class PeriodResource {
 	public void setPeriodService(PeriodService periodService) {
 		this.periodService = periodService;
 	}
-	public SeasonService getSeasonService() {
-		return seasonService;
-	}
-	public void setSeasonService(SeasonService seasonService) {
-		this.seasonService = seasonService;
-	}
+
 	public StructureService getStructureService() {
 		return structureService;
 	}

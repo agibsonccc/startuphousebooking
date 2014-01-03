@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang3.time.DateUtils;
 
 
@@ -39,8 +41,8 @@ import com.startuphouse.booking.model.Extra;
 import com.startuphouse.booking.model.ExtraItem;
 import com.startuphouse.booking.model.Guest;
 import com.startuphouse.booking.model.Payment;
-import com.startuphouse.booking.model.Room;
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.Bed;
+import com.startuphouse.booking.model.BedType;
 import com.startuphouse.booking.model.UserAware;
 import com.startuphouse.booking.model.internal.Message;
 import com.startuphouse.booking.model.listini.Convention;
@@ -50,7 +52,6 @@ import com.startuphouse.booking.service.ConventionService;
 import com.startuphouse.booking.service.ExtraService;
 import com.startuphouse.booking.service.GuestService;
 import com.startuphouse.booking.service.RoomService;
-import com.startuphouse.booking.service.SeasonService;
 import com.startuphouse.booking.service.StructureService;
 
 @ParentPackage( value="default")
@@ -65,7 +66,7 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 	private String dateIn = null;
 	private Integer id;
 	private Integer numNights;
-	private List<Room> rooms = null;
+	private List<Bed> beds = null;
 	private Message message = new Message();
 	private String dateOut = null;
 	private List<Extra> extras = null;
@@ -87,8 +88,6 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 	private RoomService roomService = null;
 	@Autowired
 	private ConventionService conventionService = null;
-	@Autowired
-	private SeasonService seasonService = null;
 	
 	@Actions({
 		@Action(
@@ -143,8 +142,8 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 	public String updateRoom() {
 		Integer numGuests;
 		Booking booking = null;			
-		RoomType newRoomType = null;
-		RoomType oldRoomType = null;
+		BedType newRoomType = null;
+		BedType oldRoomType = null;
 		
 		if(!this.checkBookingDates(this.getIdStructure())){
 			return ERROR;
@@ -159,7 +158,7 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 		if(booking.getRoom()!=null){
 			newRoomType = booking.getRoom().getRoomType();
 		}		
-		//If the Room Type changes, prices must be updated
+		//If the Bed Type changes, prices must be updated
 		if((oldRoomType!= null) && (newRoomType!= null) && !(oldRoomType.equals(newRoomType) )){
 			numGuests = booking.getNrGuests();
 			if (numGuests > newRoomType.getMaxGuests()) {	//when changing a room which has pre-selected the nrGuests attribute greater than the maxGuests attribute
@@ -182,7 +181,7 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 	}
 	
 	private void updateRoom(Booking booking){
-		Room newRoom = null; 
+		Bed newRoom = null; 
 		
 		newRoom = this.getRoomService().findRoomById(this.getBooking().getRoom().getId());
 		booking.setRoom(newRoom);	
@@ -434,7 +433,7 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 		})
 	})
 	public String goAddNewBookingFromPlanner() {
-		Room theBookedRoom = null;
+		Bed theBookedRoom = null;
 		Convention defaultConvention = null;
 		Integer numNights = 0;
 		Double roomSubtotal = 0.0;
@@ -600,7 +599,8 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 	}
 	
 	private Boolean checkBookingDates(Integer id_structure) {
-		List<Date> bookingDates = null;
+		throw new NotImplementedException();
+		/*	List<Date> bookingDates = null;
 		Season season = null;
 		
 		if(this.getBooking().getDateIn()!=null && this.getBooking().getDateOut()!=null){
@@ -627,11 +627,12 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 	
 		this.getMessage().setDescription(getText("bookingDatesOK"));
 		this.getMessage().setResult(Message.SUCCESS);
-		return true;
+		return true;*/
 	}
 	
 	private Boolean checkBookingDatesNotNull(Integer id_structure) {
-		List<Date> bookingDates = null;
+		throw new NotImplementedException();
+		/*List<Date> bookingDates = null;
 		Season season = null;
 		
 		if(this.getBooking().getDateIn()!=null && this.getBooking().getDateOut()!=null){
@@ -662,7 +663,7 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 		}
 		this.getMessage().setDescription(getText("bookingDatesOK"));
 		this.getMessage().setResult(Message.SUCCESS);
-		return true;
+		return true;*/
 	}
 	
 	private Boolean checkBookingChecking(){
@@ -790,11 +791,11 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 	public void setNumNights(Integer numNights) {
 		this.numNights = numNights;
 	}
-	public List<Room> getRooms() {
-		return rooms;
+	public List<Bed> getRooms() {
+		return beds;
 	}
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
+	public void setRooms(List<Bed> beds) {
+		this.beds = beds;
 	}
 	public String getDateOut() {
 		return dateOut;
@@ -880,11 +881,6 @@ public class BookingAction extends ActionSupport implements SessionAware,UserAwa
 	public void setConventionService(ConventionService conventionService) {
 		this.conventionService = conventionService;
 	}
-	public SeasonService getSeasonService() {
-		return seasonService;
-	}
-	public void setSeasonService(SeasonService seasonService) {
-		this.seasonService = seasonService;
-	}
+	
 		
 }

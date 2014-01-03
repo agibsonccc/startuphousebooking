@@ -23,12 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.startuphouse.booking.model.Image;
-import com.startuphouse.booking.model.RoomType;
+import com.startuphouse.booking.model.BedType;
 import com.startuphouse.booking.persistence.mybatis.mappers.RoomTypeMapper;
 
 
 @Service
-public class RoomTypeServiceImpl implements RoomTypeService{
+public class BedTypeServiceImpl implements BedTypeService{
 	@Autowired
 	private RoomTypeMapper roomTypeMapper = null;
 	@Autowired
@@ -44,13 +44,13 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 	
 	
 	@Override
-	public List<RoomType> findAll() {
+	public List<BedType> findAll() {
 		return this.getRoomTypeMapper().findAll();
 	}
 	
 	@Override
-	public List<RoomType> findRoomTypesByIdStructure(Integer id_structure) {
-		List<RoomType> ret = null;
+	public List<BedType> findRoomTypesByIdStructure(Integer id_structure) {
+		List<BedType> ret = null;
 		
 		ret =  this.getRoomTypeMapper().findRoomTypesByIdStructure(id_structure);
 		return ret;
@@ -62,7 +62,7 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 	}
 
 	@Override
-	public List<RoomType> findRoomTypesByIdStructure(Integer id_structure, Integer offset, Integer rownum) {
+	public List<BedType> findRoomTypesByIdStructure(Integer id_structure, Integer offset, Integer rownum) {
 		Map map = null;
 		
 		map = new HashMap();
@@ -73,19 +73,19 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 	}
 
 	@Override
-	public RoomType findRoomTypeById(Integer id) {
-		RoomType roomType = null;
+	public BedType findRoomTypeById(Integer id) {
+		BedType bedType = null;
 		//List<Image> images = null;
 		
-		roomType = this.getRoomTypeMapper().findRoomTypeById(id);
+		bedType = this.getRoomTypeMapper().findRoomTypeById(id);
 		//images = this.getImageService().findCheckedByIdRoomType(id);
 		//roomType.setImages(images);
-		return roomType;
+		return bedType;
 		
 	}
 
 	@Override
-	public RoomType findRoomTypeByIdStructureAndName(Integer id_structure, String name){
+	public BedType findRoomTypeByIdStructureAndName(Integer id_structure, String name){
 		Map map = null;
 		
 		map = new HashMap();
@@ -100,18 +100,18 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 	}
 
 	@Override
-	public Integer insertRoomType(RoomType roomType) {
+	public Integer insertRoomType(BedType bedType) {
 		Integer ret = 0;
 		
-		ret = this.getRoomTypeMapper().insertRoomType(roomType);		
+		ret = this.getRoomTypeMapper().insertRoomType(bedType);		
 		return ret ;
 	}
 
 	@Override
-	public Integer updateRoomType(RoomType roomType) {
+	public Integer updateRoomType(BedType bedType) {
 		Integer ret = 0;
 		
-		ret = this.getRoomTypeMapper().updateRoomType(roomType);
+		ret = this.getRoomTypeMapper().updateRoomType(bedType);
 		return ret;
 	}
 
